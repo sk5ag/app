@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "app01f72b4b0e": {}
+        "app01f72b4b0e": {},
+        "true": {},
+        "userPoolGroups": {}
       },
       "function": {
         "app01f72b4b0ePostConfirmation": {

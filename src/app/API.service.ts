@@ -19,7 +19,6 @@ export type CreateUserInput = {
 };
 
 export type ModelUserConditionInput = {
-  username?: ModelStringInput | null;
   firstname?: ModelStringInput | null;
   secondname?: ModelStringInput | null;
   imageurl?: ModelStringInput | null;
@@ -378,8 +377,8 @@ export class APIService {
     SubscriptionResponse<OnCreateUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateUser {
-        onCreateUser {
+      `subscription OnCreateUser($username: String) {
+        onCreateUser(username: $username) {
           __typename
           id
           username
@@ -398,8 +397,8 @@ export class APIService {
     SubscriptionResponse<OnUpdateUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateUser {
-        onUpdateUser {
+      `subscription OnUpdateUser($username: String) {
+        onUpdateUser(username: $username) {
           __typename
           id
           username
@@ -418,8 +417,8 @@ export class APIService {
     SubscriptionResponse<OnDeleteUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteUser {
-        onDeleteUser {
+      `subscription OnDeleteUser($username: String) {
+        onDeleteUser(username: $username) {
           __typename
           id
           username

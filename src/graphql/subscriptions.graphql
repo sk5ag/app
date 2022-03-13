@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateUser {
-  onCreateUser {
+subscription OnCreateUser($username: String) {
+  onCreateUser(username: $username) {
     id
     username
     firstname
@@ -11,8 +11,8 @@ subscription OnCreateUser {
     updatedAt
   }
 }
-subscription OnUpdateUser {
-  onUpdateUser {
+subscription OnUpdateUser($username: String) {
+  onUpdateUser(username: $username) {
     id
     username
     firstname
@@ -23,8 +23,8 @@ subscription OnUpdateUser {
     updatedAt
   }
 }
-subscription OnDeleteUser {
-  onDeleteUser {
+subscription OnDeleteUser($username: String) {
+  onDeleteUser(username: $username) {
     id
     username
     firstname

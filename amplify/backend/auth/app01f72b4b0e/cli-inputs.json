@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "app01f72b4b0e_identitypool_f72b4b0e",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "app01f72b4b0e",
     "userPoolName": "app01f72b4b0e_userpool_f72b4b0e",
     "autoVerifiedAttributes": [
@@ -36,7 +36,7 @@
     "sharedId": "f72b4b0e",
     "resourceName": "app01f72b4b0e",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
+    "useDefault": "default",
     "userPoolGroupList": [
       "Admin"
     ],
@@ -66,7 +66,6 @@
         ]
       }
     ],
-    "thirdPartyAuth": false,
     "userPoolGroups": true,
     "adminQueries": false,
     "triggers": {
@@ -75,10 +74,13 @@
       ]
     },
     "hostedUI": false,
-    "authProviders": [],
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "authTriggerConnections": [
+      "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"app01f72b4b0ePostConfirmation\"}"
+    ],
+    "authProviders": []
   }
 }
