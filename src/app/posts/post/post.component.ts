@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommentComponent } from 'src/app/comments/comment/comment.component';
 import { APIService, Post } from '../../API.service';
 
 @Component({
@@ -14,9 +16,12 @@ export class PostComponent implements OnInit {
     public posts: Array<any> = []; 
     public createPostForm: FormGroup;
 
+
   constructor(
     private api: APIService,
     private fb: FormBuilder, 
+    public dialog: MatDialog,
+
     public dialofRef: MatDialogRef<PostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
 
@@ -28,7 +33,7 @@ export class PostComponent implements OnInit {
    }
 
    async ngOnInit() {
-    /* fetch users when app loads */
+    /* fetch posts when app loads */
     await this.api.ListPosts().then((event) => {
     // this.posts = event.items as Post[];
     let postsList = event.items.map( result => {
@@ -48,6 +53,21 @@ onCreatePost(newpost: any){
 
 onClose(){
   this.dialofRef.close('IT WAS CLOSED')
+}
+
+openComment(){
+  let dialogRef = this.dialog.open( CommentComponent , {
+    width: '95%',
+    height: '95%',
+    data: {
+      postId: "21ccc1ad-7875-41b2-af8c-87e4a9a2a975"
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed'),
+    console.log(result)
+  })
 }
 
 }

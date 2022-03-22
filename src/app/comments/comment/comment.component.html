@@ -1,1 +1,32 @@
 <p>comment works!</p>
+<br>
+<mat-dialog-content>
+    <h2>
+        {{data.postId}}
+    </h2>
+    <br>
+    <div class="form-body" style="margin-left: 50px;">
+        <form autocomplete="off" [formGroup]="createCommentsForm" (ngSubmit)="onCreateComment(createCommentsForm.value)">
+            <div>
+                <label>Post ID: </label>
+                <input type="text" formControlName="commentPostId" autocomplete="off" />
+            </div>
+            <div>
+                <label>Content: </label>
+                <input type="text" formControlName="content" autocomplete="off" />
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="content-area" *ngFor="let comment of comments">
+        <br>
+        <div>{{ comment.id }}</div>
+        <div>{{ comment.content }}</div>
+        <hr>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button>Cancle</button>
+    <button mat-raised-button (click)="onClose()">Close</button>
+</mat-dialog-actions>
