@@ -1,4 +1,13 @@
 amplify-s3-image {
     --height: 200px;
-    --width: 400px;
+    --width: 180px;
+}
+
+.items-position {
+    align-items: center;
+    -ms-flex-item-align: center;
+}
+
+.content-area {
+    margin: 50px;
 }

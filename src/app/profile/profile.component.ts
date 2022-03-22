@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import {APIService, User} from "../API.service";
+import { APIService, User, Event } from "../API.service";
+import { UploadProfileImageComponent } from './upload-profile-image/upload-profile-image.component';
 
 
 @Component({
@@ -16,10 +18,15 @@ export class ProfileComponent implements OnInit{
 
     /* declare users variable */
     public users: Array<User> = [];
+    public events: Array<Event> = []; 
 
     private subscription: Subscription | null = null;
 
-  constructor(private api: APIService, private fb: FormBuilder) {
+  constructor(
+    private api: APIService, 
+    private fb: FormBuilder, 
+    public dialog: MatDialog
+    ) {
     this.createForm = this.fb.group({
       id: [""],
       username: ["", Validators.required],
@@ -49,6 +56,7 @@ export class ProfileComponent implements OnInit{
 
   }
 
+
   populateForm(data: User[]){
 
     this.createForm.patchValue({
@@ -68,13 +76,22 @@ export class ProfileComponent implements OnInit{
     this.api
       .UpdateUser(user)
       .then((event) => {
-        console.log("User: item created!");
+        console.log("User: item updated!");
         this.createForm.reset();
       })
       .catch((e) => {
-        console.log("error creating user...", e);
+        console.log("error updating user...", e);
       });
   }  
+
+  onUploadImage(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.width = "75%";
+    // dialogConfig.height = "90%";
+    this.dialog.open(UploadProfileImageComponent, dialogConfig)
+  }
 
   ngOnDestroy() {
     if (this.subscription) {

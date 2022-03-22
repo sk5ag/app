@@ -2,45 +2,57 @@
     <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
         <div>
             <h1>Welcome {{ user.username }}!</h1>
-            <br>
             <button (click)="signOut()">Sign Out</button>
         </div>
 
-        <amplify-s3-image-picker level="public"></amplify-s3-image-picker>
+        <div class="content-area">
+            <mat-card>
+                <mat-card-header>
+                    <div class="items-position">
+                        <amplify-s3-image path="/" img-key="Photo.jpg"></amplify-s3-image>
+                        <button mat-mini-fab color="none" (click)="onUploadImage()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
 
-        <br>
-        <div class="form-body">
-            <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
-                <div>
-                    <label>id: </label>
-                    <input type="text" formControlName="id" autocomplete="off" />
-                </div>
-                <div>
-                    <label>Username: </label>
-                    <input type="text" formControlName="username" autocomplete="off" />
-                </div>
-                <div>
-                    <label>Firstname: </label>
-                    <input type="text" formControlName="firstname" autocomplete="off" />
-                </div>
-                <div>
-                    <label>Secondname: </label>
-                    <input type="text" formControlName="secondname" autocomplete="off" />
-                </div>
-                <div>
-                    <label>Email: </label>
-                    <input type="text" formControlName="email" autocomplete="off" />
-                </div>
-                <div>
-                    <label>Image URL: </label>
-                    <input type="text" formControlName="imageurl" autocomplete="off" />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+                </mat-card-header>
+                <mat-card-content>
+                    <br>
+                    <div class="form-body">
+                        <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
+                            <div>
+                                <label>id: </label>
+                                <input type="text" formControlName="id" autocomplete="off" />
+                            </div>
+                            <div>
+                                <label>Username: </label>
+                                <input type="text" formControlName="username" autocomplete="off" />
+                            </div>
+                            <div>
+                                <label>Firstname: </label>
+                                <input type="text" formControlName="firstname" autocomplete="off" />
+                            </div>
+                            <div>
+                                <label>Secondname: </label>
+                                <input type="text" formControlName="secondname" autocomplete="off" />
+                            </div>
+                            <div>
+                                <label>Email: </label>
+                                <input type="text" formControlName="email" autocomplete="off" />
+                            </div>
+                            <div>
+                                <label>Image URL: </label>
+                                <input type="text" formControlName="imageurl" autocomplete="off" />
+                            </div>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
 
         <br>
-        <div *ngFor="let user of users">
+        <div class="content-area" *ngFor="let user of users">
             <br>
             <div>{{ user.username }}</div>
             <div>{{ user.email }}</div>
@@ -50,4 +62,5 @@
             <br>
         </div>
     </ng-template>
+
 </amplify-authenticator>

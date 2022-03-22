@@ -1,8 +1,25 @@
-type User @model {
+type User @model 
+  {
   id: ID!
   username: String!
   firstname: String
   secondname: String
   imageurl: String
   email: String
+}
+type Event @model {
+  id: ID!
+  eventtitle: String!
+  posts: [Post] @connection(name: "EventPosts")
+}
+type Post @model {
+  id: ID!
+  title: String!
+  event: Event @connection(name: "EventPosts")
+  comments: [Comment] @connection(name: "PostComments")
+}
+type Comment @model {
+  id: ID!
+  content: String
+  post: Post @connection(name: "PostComments")
 }
