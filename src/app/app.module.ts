@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'; 
 import { MatIconModule } from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table'; 
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './events/event/event.component';
 import { PostsComponent } from './posts/posts.component';
@@ -52,13 +53,17 @@ import { CommentComponent } from './comments/comment/comment.component';
     MatDialogModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
     PostsComponent,
-    PostComponent
+    PostComponent,
+    EventComponent,
+    CommentComponent,
+    CommentsComponent
   ],
 })
 export class AppModule { }

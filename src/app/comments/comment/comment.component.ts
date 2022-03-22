@@ -33,7 +33,7 @@ export class CommentComponent implements OnInit {
       // this.comments = event.items as Comment[];
       let commentsList = event.items.map( result => {
         console.log('results', result);
-        if (result?.post?.id === "21ccc1ad-7875-41b2-af8c-87e4a9a2a975"){
+        if (result?.post?.id === "cee77d43-4258-4705-80a8-b3dc6f6d63ad"){
           this.comments.push(result)
         }
       })

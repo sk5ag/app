@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import {MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommentComponent } from 'src/app/comments/comment/comment.component';
 import { APIService, Post } from '../../API.service';
@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
   ) {
     this.createPostForm = this.fb.group({
       title: ["", Validators.required],
-      postEventId: [data.eventId]
+      postEventId: [this.data.eventId]
     });
    }
 
@@ -38,7 +38,7 @@ export class PostComponent implements OnInit {
     // this.posts = event.items as Post[];
     let postsList = event.items.map( result => {
       // console.log('results', result?.event?.id);
-      if (result?.event?.id === '7e50b27c-316a-4a1f-9104-e10f7f93a6aa'){
+      if (result?.event?.id === this.data.eventId){
         this.posts.push(result)
       }
     })
