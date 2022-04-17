@@ -6,15 +6,19 @@ type User @model
   secondname: String
   imageurl: String
   email: String
+  activities: [Activity] @connection(name: "UserActivity")
 }
 type Event @model {
   id: ID!
   eventtitle: String!
   posts: [Post] @connection(name: "EventPosts")
+  activities: [Activity] @connection(name: "EventActivity")
 }
-type Post @model {
+type Post @model @key(name: "postsByEventId",fields: ["postEventId"]){
   id: ID!
   title: String!
+  status: Boolean
+  postEventId: String
   event: Event @connection(name: "EventPosts")
   comments: [Comment] @connection(name: "PostComments")
 }
@@ -22,4 +26,21 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
+}
+type Activity @model
+    @auth(
+    rules: [
+      {allow: owner, ownerField: "user", operations: [create, update, delete]},
+    ])
+ {
+  id: ID!
+  name: String
+  description: String
+  owneId: String
+  reported: Boolean
+  completed: Boolean
+  eventId: String
+  eventTitle: String
+  event: Event @connection(name: "EventActivity")
+  user: User @connection(name: "UserActivity")
 }

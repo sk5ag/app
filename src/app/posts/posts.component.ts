@@ -37,12 +37,12 @@ export class PostsComponent implements OnInit {
       // this.posts = event.items as Post[];
       // console.log('Posts FETCHED: ', this.posts)
       let postsList = event.items.map( result => {
-        console.log('results', result?.event?.id);
+        // console.log('results', result?.event?.id);
         if (result?.event?.id === this.data.eventId){
           this.posts.push(result)
         }
       })
-      console.log('Posts FETCHED: ', this.posts)
+      // console.log('Posts FETCHED: ', this.posts)
     });
     this.listData = new MatTableDataSource(this.posts);
 

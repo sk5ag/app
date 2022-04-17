@@ -35,7 +35,7 @@ export class CommentsComponent implements OnInit {
       // this.posts = event.items as Post[];
       // console.log('Posts FETCHED: ', this.posts)
       let postsList = event.items.map( result => {
-        console.log('results', result);
+        // console.log('results', result);
         if (result?.post?.id === this.data.postId){
           this.comments.push(result)
         }

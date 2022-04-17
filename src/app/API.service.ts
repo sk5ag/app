@@ -76,6 +76,72 @@ export type User = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: ModelActivityConnection;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type ModelActivityConnection = {
+  __typename: "ModelActivityConnection";
+  items?: Array<Activity | null>;
+  nextToken?: string | null;
+};
+
+export type Activity = {
+  __typename: "Activity";
+  id?: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: Event;
+  user?: User;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type Event = {
+  __typename: "Event";
+  id?: string;
+  eventtitle?: string;
+  posts?: ModelPostConnection;
+  activities?: ModelActivityConnection;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type ModelPostConnection = {
+  __typename: "ModelPostConnection";
+  items?: Array<Post | null>;
+  nextToken?: string | null;
+};
+
+export type Post = {
+  __typename: "Post";
+  id?: string;
+  title?: string;
+  status?: boolean | null;
+  postEventId?: string | null;
+  event?: Event;
+  comments?: ModelCommentConnection;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type ModelCommentConnection = {
+  __typename: "ModelCommentConnection";
+  items?: Array<Comment | null>;
+  nextToken?: string | null;
+};
+
+export type Comment = {
+  __typename: "Comment";
+  id?: string;
+  content?: string | null;
+  post?: Post;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -105,46 +171,6 @@ export type ModelEventConditionInput = {
   not?: ModelEventConditionInput | null;
 };
 
-export type Event = {
-  __typename: "Event";
-  id?: string;
-  eventtitle?: string;
-  posts?: ModelPostConnection;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type ModelPostConnection = {
-  __typename: "ModelPostConnection";
-  items?: Array<Post | null>;
-  nextToken?: string | null;
-};
-
-export type Post = {
-  __typename: "Post";
-  id?: string;
-  title?: string;
-  event?: Event;
-  comments?: ModelCommentConnection;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type ModelCommentConnection = {
-  __typename: "ModelCommentConnection";
-  items?: Array<Comment | null>;
-  nextToken?: string | null;
-};
-
-export type Comment = {
-  __typename: "Comment";
-  id?: string;
-  content?: string | null;
-  post?: Post;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
 export type UpdateEventInput = {
   id: string;
   eventtitle?: string | null;
@@ -157,19 +183,30 @@ export type DeleteEventInput = {
 export type CreatePostInput = {
   id?: string | null;
   title: string;
+  status?: boolean | null;
   postEventId?: string | null;
 };
 
 export type ModelPostConditionInput = {
   title?: ModelStringInput | null;
+  status?: ModelBooleanInput | null;
+  postEventId?: ModelStringInput | null;
   and?: Array<ModelPostConditionInput | null> | null;
   or?: Array<ModelPostConditionInput | null> | null;
   not?: ModelPostConditionInput | null;
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type UpdatePostInput = {
   id: string;
   title?: string | null;
+  status?: boolean | null;
   postEventId?: string | null;
 };
 
@@ -197,6 +234,49 @@ export type UpdateCommentInput = {
 };
 
 export type DeleteCommentInput = {
+  id: string;
+};
+
+export type CreateActivityInput = {
+  id?: string | null;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  activityEventId?: string | null;
+  activityUserId?: string | null;
+};
+
+export type ModelActivityConditionInput = {
+  name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  owneId?: ModelStringInput | null;
+  reported?: ModelBooleanInput | null;
+  completed?: ModelBooleanInput | null;
+  eventId?: ModelStringInput | null;
+  eventTitle?: ModelStringInput | null;
+  and?: Array<ModelActivityConditionInput | null> | null;
+  or?: Array<ModelActivityConditionInput | null> | null;
+  not?: ModelActivityConditionInput | null;
+};
+
+export type UpdateActivityInput = {
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  activityEventId?: string | null;
+  activityUserId?: string | null;
+};
+
+export type DeleteActivityInput = {
   id: string;
 };
 
@@ -251,6 +331,8 @@ export type ModelEventConnection = {
 export type ModelPostFilterInput = {
   id?: ModelIDInput | null;
   title?: ModelStringInput | null;
+  status?: ModelBooleanInput | null;
+  postEventId?: ModelStringInput | null;
   and?: Array<ModelPostFilterInput | null> | null;
   or?: Array<ModelPostFilterInput | null> | null;
   not?: ModelPostFilterInput | null;
@@ -264,6 +346,20 @@ export type ModelCommentFilterInput = {
   not?: ModelCommentFilterInput | null;
 };
 
+export type ModelActivityFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  owneId?: ModelStringInput | null;
+  reported?: ModelBooleanInput | null;
+  completed?: ModelBooleanInput | null;
+  eventId?: ModelStringInput | null;
+  eventTitle?: ModelStringInput | null;
+  and?: Array<ModelActivityFilterInput | null> | null;
+  or?: Array<ModelActivityFilterInput | null> | null;
+  not?: ModelActivityFilterInput | null;
+};
+
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
@@ -272,6 +368,23 @@ export type CreateUserMutation = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -284,6 +397,23 @@ export type UpdateUserMutation = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -296,6 +426,23 @@ export type DeleteUserMutation = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -310,6 +457,25 @@ export type CreateEventMutation = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -329,6 +495,25 @@ export type UpdateEventMutation = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -348,6 +533,25 @@ export type DeleteEventMutation = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -361,12 +565,18 @@ export type CreatePostMutation = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -391,12 +601,18 @@ export type UpdatePostMutation = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -421,12 +637,18 @@ export type DeletePostMutation = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -455,6 +677,8 @@ export type CreateCommentMutation = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -481,6 +705,8 @@ export type UpdateCommentMutation = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -507,6 +733,8 @@ export type DeleteCommentMutation = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -525,6 +753,138 @@ export type DeleteCommentMutation = {
   updatedAt: string;
 };
 
+export type CreateActivityMutation = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateActivityMutation = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteActivityMutation = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type GetUserQuery = {
   __typename: "User";
   id: string;
@@ -533,6 +893,23 @@ export type GetUserQuery = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -547,6 +924,10 @@ export type ListUsersQuery = {
     secondname?: string | null;
     imageurl?: string | null;
     email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -563,6 +944,25 @@ export type GetEventQuery = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -582,6 +982,10 @@ export type ListEventsQuery = {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
     } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -592,12 +996,18 @@ export type GetPostQuery = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -624,6 +1034,8 @@ export type ListPostsQuery = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -649,6 +1061,8 @@ export type GetCommentQuery = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -677,6 +1091,88 @@ export type ListCommentsQuery = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetActivityQuery = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListActivitysQuery = {
+  __typename: "ModelActivityConnection";
+  items: Array<{
+    __typename: "Activity";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    owneId?: string | null;
+    reported?: boolean | null;
+    completed?: boolean | null;
+    eventId?: string | null;
+    eventTitle?: string | null;
+    event?: {
+      __typename: "Event";
+      id: string;
+      eventtitle: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    user?: {
+      __typename: "User";
+      id: string;
+      username: string;
+      firstname?: string | null;
+      secondname?: string | null;
+      imageurl?: string | null;
+      email?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -694,6 +1190,23 @@ export type OnCreateUserSubscription = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -706,6 +1219,23 @@ export type OnUpdateUserSubscription = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -718,6 +1248,23 @@ export type OnDeleteUserSubscription = {
   secondname?: string | null;
   imageurl?: string | null;
   email?: string | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -732,6 +1279,25 @@ export type OnCreateEventSubscription = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -751,6 +1317,25 @@ export type OnUpdateEventSubscription = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -770,6 +1355,25 @@ export type OnDeleteEventSubscription = {
       __typename: "Post";
       id: string;
       title: string;
+      status?: boolean | null;
+      postEventId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  activities?: {
+    __typename: "ModelActivityConnection";
+    items: Array<{
+      __typename: "Activity";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      owneId?: string | null;
+      reported?: boolean | null;
+      completed?: boolean | null;
+      eventId?: string | null;
+      eventTitle?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -783,12 +1387,18 @@ export type OnCreatePostSubscription = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -813,12 +1423,18 @@ export type OnUpdatePostSubscription = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -843,12 +1459,18 @@ export type OnDeletePostSubscription = {
   __typename: "Post";
   id: string;
   title: string;
+  status?: boolean | null;
+  postEventId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
     eventtitle: string;
     posts?: {
       __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -877,6 +1499,8 @@ export type OnCreateCommentSubscription = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -903,6 +1527,8 @@ export type OnUpdateCommentSubscription = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -929,6 +1555,8 @@ export type OnDeleteCommentSubscription = {
     __typename: "Post";
     id: string;
     title: string;
+    status?: boolean | null;
+    postEventId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -938,6 +1566,138 @@ export type OnDeleteCommentSubscription = {
     } | null;
     comments?: {
       __typename: "ModelCommentConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateActivitySubscription = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateActivitySubscription = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteActivitySubscription = {
+  __typename: "Activity";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  owneId?: string | null;
+  reported?: boolean | null;
+  completed?: boolean | null;
+  eventId?: string | null;
+  eventTitle?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -964,6 +1724,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -992,6 +1769,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1020,6 +1814,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1050,6 +1861,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1085,6 +1915,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1120,6 +1969,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1149,11 +2017,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1195,11 +2069,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1241,11 +2121,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1291,6 +2177,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1333,6 +2221,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1375,6 +2265,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1404,6 +2296,186 @@ export class APIService {
     )) as any;
     return <DeleteCommentMutation>response.data.deleteComment;
   }
+  async CreateActivity(
+    input: CreateActivityInput,
+    condition?: ModelActivityConditionInput
+  ): Promise<CreateActivityMutation> {
+    const statement = `mutation CreateActivity($input: CreateActivityInput!, $condition: ModelActivityConditionInput) {
+        createActivity(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateActivityMutation>response.data.createActivity;
+  }
+  async UpdateActivity(
+    input: UpdateActivityInput,
+    condition?: ModelActivityConditionInput
+  ): Promise<UpdateActivityMutation> {
+    const statement = `mutation UpdateActivity($input: UpdateActivityInput!, $condition: ModelActivityConditionInput) {
+        updateActivity(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateActivityMutation>response.data.updateActivity;
+  }
+  async DeleteActivity(
+    input: DeleteActivityInput,
+    condition?: ModelActivityConditionInput
+  ): Promise<DeleteActivityMutation> {
+    const statement = `mutation DeleteActivity($input: DeleteActivityInput!, $condition: ModelActivityConditionInput) {
+        deleteActivity(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteActivityMutation>response.data.deleteActivity;
+  }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
         getUser(id: $id) {
@@ -1414,6 +2486,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1442,6 +2531,10 @@ export class APIService {
             secondname
             imageurl
             email
+            activities {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1475,6 +2568,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1508,6 +2620,10 @@ export class APIService {
               __typename
               nextToken
             }
+            activities {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1535,11 +2651,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1581,6 +2703,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1623,6 +2747,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1665,6 +2791,8 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
               createdAt
               updatedAt
             }
@@ -1689,6 +2817,117 @@ export class APIService {
     )) as any;
     return <ListCommentsQuery>response.data.listComments;
   }
+  async GetActivity(id: string): Promise<GetActivityQuery> {
+    const statement = `query GetActivity($id: ID!) {
+        getActivity(id: $id) {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetActivityQuery>response.data.getActivity;
+  }
+  async ListActivitys(
+    filter?: ModelActivityFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListActivitysQuery> {
+    const statement = `query ListActivitys($filter: ModelActivityFilterInput, $limit: Int, $nextToken: String) {
+        listActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            description
+            owneId
+            reported
+            completed
+            eventId
+            eventTitle
+            event {
+              __typename
+              id
+              eventtitle
+              createdAt
+              updatedAt
+            }
+            user {
+              __typename
+              id
+              username
+              firstname
+              secondname
+              imageurl
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListActivitysQuery>response.data.listActivitys;
+  }
   OnCreateUserListener: Observable<
     SubscriptionResponse<OnCreateUserSubscription>
   > = API.graphql(
@@ -1702,6 +2941,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1722,6 +2978,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1742,6 +3015,23 @@ export class APIService {
           secondname
           imageurl
           email
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1764,6 +3054,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1791,6 +3100,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1818,6 +3146,25 @@ export class APIService {
               __typename
               id
               title
+              status
+              postEventId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          activities {
+            __typename
+            items {
+              __typename
+              id
+              name
+              description
+              owneId
+              reported
+              completed
+              eventId
+              eventTitle
               createdAt
               updatedAt
             }
@@ -1839,11 +3186,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1877,11 +3230,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1915,11 +3274,17 @@ export class APIService {
           __typename
           id
           title
+          status
+          postEventId
           event {
             __typename
             id
             eventtitle
             posts {
+              __typename
+              nextToken
+            }
+            activities {
               __typename
               nextToken
             }
@@ -1957,6 +3322,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -1991,6 +3358,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -2025,6 +3394,8 @@ export class APIService {
             __typename
             id
             title
+            status
+            postEventId
             event {
               __typename
               id
@@ -2045,4 +3416,160 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteCommentSubscription>>;
+
+  OnCreateActivityListener: Observable<
+    SubscriptionResponse<OnCreateActivitySubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateActivity {
+        onCreateActivity {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateActivitySubscription>>;
+
+  OnUpdateActivityListener: Observable<
+    SubscriptionResponse<OnUpdateActivitySubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateActivity {
+        onUpdateActivity {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateActivitySubscription>>;
+
+  OnDeleteActivityListener: Observable<
+    SubscriptionResponse<OnDeleteActivitySubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteActivity {
+        onDeleteActivity {
+          __typename
+          id
+          name
+          description
+          owneId
+          reported
+          completed
+          eventId
+          eventTitle
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteActivitySubscription>>;
 }

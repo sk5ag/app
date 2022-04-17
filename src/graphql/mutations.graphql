@@ -10,6 +10,21 @@ mutation CreateUser(
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -25,6 +40,21 @@ mutation UpdateUser(
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -40,6 +70,21 @@ mutation DeleteUser(
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -55,6 +100,23 @@ mutation CreateEvent(
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -75,6 +137,23 @@ mutation UpdateEvent(
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -95,6 +174,23 @@ mutation DeleteEvent(
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -111,10 +207,15 @@ mutation CreatePost(
   createPost(input: $input, condition: $condition) {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -140,10 +241,15 @@ mutation UpdatePost(
   updatePost(input: $input, condition: $condition) {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -169,10 +275,15 @@ mutation DeletePost(
   deletePost(input: $input, condition: $condition) {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -201,6 +312,8 @@ mutation CreateComment(
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -227,6 +340,8 @@ mutation UpdateComment(
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -253,6 +368,8 @@ mutation DeleteComment(
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -260,6 +377,132 @@ mutation DeleteComment(
         updatedAt
       }
       comments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateActivity(
+  $input: CreateActivityInput!
+  $condition: ModelActivityConditionInput
+) {
+  createActivity(input: $input, condition: $condition) {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateActivity(
+  $input: UpdateActivityInput!
+  $condition: ModelActivityConditionInput
+) {
+  updateActivity(input: $input, condition: $condition) {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteActivity(
+  $input: DeleteActivityInput!
+  $condition: ModelActivityConditionInput
+) {
+  deleteActivity(input: $input, condition: $condition) {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
         nextToken
       }
       createdAt

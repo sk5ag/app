@@ -7,6 +7,21 @@ query GetUser($id: ID!) {
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -24,6 +39,9 @@ query ListUsers(
       secondname
       imageurl
       email
+      activities {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -38,6 +56,23 @@ query GetEvent($id: ID!) {
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -59,6 +94,9 @@ query ListEvents(
       posts {
         nextToken
       }
+      activities {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -69,10 +107,15 @@ query GetPost($id: ID!) {
   getPost(id: $id) {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -100,6 +143,8 @@ query ListPosts(
     items {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -122,6 +167,8 @@ query GetComment($id: ID!) {
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -150,6 +197,84 @@ query ListComments(
       post {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetActivity($id: ID!) {
+  getActivity(id: $id) {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListActivitys(
+  $filter: ModelActivityFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      owneId
+      reported
+      completed
+      eventId
+      eventTitle
+      event {
+        id
+        eventtitle
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        firstname
+        secondname
+        imageurl
+        email
         createdAt
         updatedAt
       }

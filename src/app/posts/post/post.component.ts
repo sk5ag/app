@@ -42,7 +42,7 @@ export class PostComponent implements OnInit {
         this.posts.push(result)
       }
     })
-    console.log('Posts FETCHED: ', this.posts)
+    // console.log('Posts FETCHED: ', this.posts)
   });
   }
 

@@ -19,12 +19,15 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'; 
 import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './events/event/event.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './posts/post/post.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentComponent } from './comments/comment/comment.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ActivityComponent } from './activities/activity/activity.component';
 
 
 
@@ -38,7 +41,9 @@ import { CommentComponent } from './comments/comment/comment.component';
     PostsComponent,
     PostComponent,
     CommentsComponent,
-    CommentComponent
+    CommentComponent,
+    ActivitiesComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { CommentComponent } from './comments/comment/comment.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule   
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -63,7 +69,9 @@ import { CommentComponent } from './comments/comment/comment.component';
     PostComponent,
     EventComponent,
     CommentComponent,
-    CommentsComponent
+    CommentsComponent,
+    ActivitiesComponent,
+    ActivityComponent
   ],
 })
 export class AppModule { }

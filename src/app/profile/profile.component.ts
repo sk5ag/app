@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Auth } from 'aws-amplify';
 import { Subscription } from 'rxjs';
 import { APIService, User, Event } from "../API.service";
 import { UploadProfileImageComponent } from './upload-profile-image/upload-profile-image.component';
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit{
     /* declare users variable */
     public users: Array<User> = [];
     public events: Array<Event> = []; 
+    public userInfo: Array<User> = [];
 
     private subscription: Subscription | null = null;
 
@@ -38,13 +40,19 @@ export class ProfileComponent implements OnInit{
   }
 
   async ngOnInit() {
-    /* fetch users when app loads */
-    this.api.ListUsers().then((event) => {
-      this.users = event.items as User[];
-      console.log('USERS FETCHED: ', this.users);
+    /* Who is the logged in user */
+    Auth.currentUserInfo().then((event) => {
+      this.userInfo = event.id;
+      // console.log('Current User Information: ', this.userInfo)
+    })
+    // /* fetch users when app loads */
+    // this.api.ListUsers().then((event) => {
+    //   this.users = event.items as User[];
+    //   console.log('USERS FETCHED: ', this.users);
 
-      this.populateForm(this.users);
-    });
+    //   this.populateForm(this.users);
+      
+    // });
 
         /* subscribe to new users being created */
         this.subscription = <Subscription>(
@@ -72,11 +80,11 @@ export class ProfileComponent implements OnInit{
   }
 
   public onCreate(user: any) {
-    console.log('Form data received: ', user)
+    // console.log('Form data received: ', user)
     this.api
       .UpdateUser(user)
       .then((event) => {
-        console.log("User: item updated!");
+        // console.log("User: item updated!");
         this.createForm.reset();
       })
       .catch((e) => {

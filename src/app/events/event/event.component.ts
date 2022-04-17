@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PostComponent } from 'src/app/posts/post/post.component';
 import { APIService, Event } from '../../API.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { APIService, Event } from '../../API.service';
 })
 export class EventComponent implements OnInit {
 
-  /* declare events variable */
+  /* declare events variable */ 
   public events: Array<Event> = []; 
 
   public createEventForm: FormGroup;

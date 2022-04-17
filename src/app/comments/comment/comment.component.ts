@@ -32,7 +32,7 @@ export class CommentComponent implements OnInit {
     await this.api.ListComments().then((event) => {
       // this.comments = event.items as Comment[];
       let commentsList = event.items.map( result => {
-        console.log('results', result);
+        // console.log('results', result);
         if (result?.post?.id === "cee77d43-4258-4705-80a8-b3dc6f6d63ad"){
           this.comments.push(result)
         }
@@ -41,7 +41,7 @@ export class CommentComponent implements OnInit {
     });
   }
   onCreateComment(newcomment: any){
-    console.log('New Comment ', newcomment)
+    // console.log('New Comment ', newcomment)
     this.api.CreateComment(newcomment)
   }
   

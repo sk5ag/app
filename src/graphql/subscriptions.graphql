@@ -7,6 +7,21 @@ subscription OnCreateUser {
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -19,6 +34,21 @@ subscription OnUpdateUser {
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -31,6 +61,21 @@ subscription OnDeleteUser {
     secondname
     imageurl
     email
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -43,6 +88,23 @@ subscription OnCreateEvent {
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -60,6 +122,23 @@ subscription OnUpdateEvent {
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -77,6 +156,23 @@ subscription OnDeleteEvent {
       items {
         id
         title
+        status
+        postEventId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    activities {
+      items {
+        id
+        name
+        description
+        owneId
+        reported
+        completed
+        eventId
+        eventTitle
         createdAt
         updatedAt
       }
@@ -90,10 +186,15 @@ subscription OnCreatePost {
   onCreatePost {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -116,10 +217,15 @@ subscription OnUpdatePost {
   onUpdatePost {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -142,10 +248,15 @@ subscription OnDeletePost {
   onDeletePost {
     id
     title
+    status
+    postEventId
     event {
       id
       eventtitle
       posts {
+        nextToken
+      }
+      activities {
         nextToken
       }
       createdAt
@@ -171,6 +282,8 @@ subscription OnCreateComment {
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -194,6 +307,8 @@ subscription OnUpdateComment {
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -217,6 +332,8 @@ subscription OnDeleteComment {
     post {
       id
       title
+      status
+      postEventId
       event {
         id
         eventtitle
@@ -224,6 +341,123 @@ subscription OnDeleteComment {
         updatedAt
       }
       comments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateActivity {
+  onCreateActivity {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateActivity {
+  onUpdateActivity {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteActivity {
+  onDeleteActivity {
+    id
+    name
+    description
+    owneId
+    reported
+    completed
+    eventId
+    eventTitle
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
         nextToken
       }
       createdAt
