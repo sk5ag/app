@@ -7,6 +7,8 @@ type User @model
   imageurl: String
   email: String
   activities: [Activity] @connection(name: "UserActivity")
+  jobs: [Jobs] @connection(name: "UserJobs")
+
 }
 type Event @model {
   id: ID!
@@ -43,4 +45,24 @@ type Activity @model
   eventTitle: String
   event: Event @connection(name: "EventActivity")
   user: User @connection(name: "UserActivity")
+}
+type Jobs @model
+    @auth(
+    rules: [
+      {allow: owner, ownerField: "user", operations: [create, update]},
+    ])
+ {
+  id: ID!
+  jobname: String
+  jobdescription: String
+  owneId: String
+  jobreported: Boolean
+  jobcompleted: Boolean
+  jobeventId: String
+  jobeventTitle: String
+  jobpostId: String
+  jobposttitle: String
+  reccordState: String
+  event: Event @connection(name: "EventActivity")
+  user: User @connection(name: "UserJobs")
 }

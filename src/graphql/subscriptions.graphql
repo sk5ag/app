@@ -22,6 +22,24 @@ subscription OnCreateUser {
       }
       nextToken
     }
+    jobs {
+      items {
+        id
+        jobname
+        jobdescription
+        owneId
+        jobreported
+        jobcompleted
+        jobeventId
+        jobeventTitle
+        jobpostId
+        jobposttitle
+        reccordState
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -49,6 +67,24 @@ subscription OnUpdateUser {
       }
       nextToken
     }
+    jobs {
+      items {
+        id
+        jobname
+        jobdescription
+        owneId
+        jobreported
+        jobcompleted
+        jobeventId
+        jobeventTitle
+        jobpostId
+        jobposttitle
+        reccordState
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -71,6 +107,24 @@ subscription OnDeleteUser {
         completed
         eventId
         eventTitle
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    jobs {
+      items {
+        id
+        jobname
+        jobdescription
+        owneId
+        jobreported
+        jobcompleted
+        jobeventId
+        jobeventTitle
+        jobpostId
+        jobposttitle
+        reccordState
         createdAt
         updatedAt
       }
@@ -382,6 +436,9 @@ subscription OnCreateActivity {
       activities {
         nextToken
       }
+      jobs {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -421,6 +478,9 @@ subscription OnUpdateActivity {
       activities {
         nextToken
       }
+      jobs {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -458,6 +518,144 @@ subscription OnDeleteActivity {
       imageurl
       email
       activities {
+        nextToken
+      }
+      jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateJobs {
+  onCreateJobs {
+    id
+    jobname
+    jobdescription
+    owneId
+    jobreported
+    jobcompleted
+    jobeventId
+    jobeventTitle
+    jobpostId
+    jobposttitle
+    reccordState
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateJobs {
+  onUpdateJobs {
+    id
+    jobname
+    jobdescription
+    owneId
+    jobreported
+    jobcompleted
+    jobeventId
+    jobeventTitle
+    jobpostId
+    jobposttitle
+    reccordState
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteJobs {
+  onDeleteJobs {
+    id
+    jobname
+    jobdescription
+    owneId
+    jobreported
+    jobcompleted
+    jobeventId
+    jobeventTitle
+    jobpostId
+    jobposttitle
+    reccordState
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      jobs {
         nextToken
       }
       createdAt

@@ -22,6 +22,24 @@ query GetUser($id: ID!) {
       }
       nextToken
     }
+    jobs {
+      items {
+        id
+        jobname
+        jobdescription
+        owneId
+        jobreported
+        jobcompleted
+        jobeventId
+        jobeventTitle
+        jobpostId
+        jobposttitle
+        reccordState
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -40,6 +58,9 @@ query ListUsers(
       imageurl
       email
       activities {
+        nextToken
+      }
+      jobs {
         nextToken
       }
       createdAt
@@ -240,6 +261,9 @@ query GetActivity($id: ID!) {
       activities {
         nextToken
       }
+      jobs {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -262,6 +286,91 @@ query ListActivitys(
       completed
       eventId
       eventTitle
+      event {
+        id
+        eventtitle
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        firstname
+        secondname
+        imageurl
+        email
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetJobs($id: ID!) {
+  getJobs(id: $id) {
+    id
+    jobname
+    jobdescription
+    owneId
+    jobreported
+    jobcompleted
+    jobeventId
+    jobeventTitle
+    jobpostId
+    jobposttitle
+    reccordState
+    event {
+      id
+      eventtitle
+      posts {
+        nextToken
+      }
+      activities {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    user {
+      id
+      username
+      firstname
+      secondname
+      imageurl
+      email
+      activities {
+        nextToken
+      }
+      jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListJobss(
+  $filter: ModelJobsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJobss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      jobname
+      jobdescription
+      owneId
+      jobreported
+      jobcompleted
+      jobeventId
+      jobeventTitle
+      jobpostId
+      jobposttitle
+      reccordState
       event {
         id
         eventtitle

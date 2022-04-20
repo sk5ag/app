@@ -35,6 +35,8 @@
             <th mat-header-cell *matHeaderCellDef> ACTIONS </th>
             <td mat-cell *matCellDef="let element">
                 <button>Action</button>
+                <button (click)="deleteActivity(element)">Delete</button>
+
             </td>
         </ng-container>
 

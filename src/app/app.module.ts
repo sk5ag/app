@@ -20,6 +20,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './events/event/event.component';
 import { PostsComponent } from './posts/posts.component';
@@ -28,6 +34,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { CommentComponent } from './comments/comment/comment.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityComponent } from './activities/activity/activity.component';
+import { AuthGuard } from './auth.guard';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -43,7 +51,8 @@ import { ActivityComponent } from './activities/activity/activity.component';
     CommentsComponent,
     CommentComponent,
     ActivitiesComponent,
-    ActivityComponent
+    ActivityComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +69,14 @@ import { ActivityComponent } from './activities/activity/activity.component';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
-    MatCheckboxModule   
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatSnackBarModule       
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [
     PostsComponent,

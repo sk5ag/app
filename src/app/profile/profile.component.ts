@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Auth } from 'aws-amplify';
 import { Subscription } from 'rxjs';
 import { APIService, User, Event } from "../API.service";
+import { AuthService } from '../Auth/auth.service';
 import { UploadProfileImageComponent } from './upload-profile-image/upload-profile-image.component';
 
 
@@ -27,7 +27,8 @@ export class ProfileComponent implements OnInit{
   constructor(
     private api: APIService, 
     private fb: FormBuilder, 
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public authService: AuthService
     ) {
     this.createForm = this.fb.group({
       id: [""],
@@ -40,19 +41,22 @@ export class ProfileComponent implements OnInit{
   }
 
   async ngOnInit() {
-    /* Who is the logged in user */
-    Auth.currentUserInfo().then((event) => {
-      this.userInfo = event.id;
-      // console.log('Current User Information: ', this.userInfo)
-    })
-    // /* fetch users when app loads */
-    // this.api.ListUsers().then((event) => {
-    //   this.users = event.items as User[];
-    //   console.log('USERS FETCHED: ', this.users);
 
-    //   this.populateForm(this.users);
-      
-    // });
+    this.authService.loggedIn().then(res => {
+      console.log('Logged IN User is: ', res)
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+    this.authService.whichUser().then((res => {
+      this.userInfo = res;
+      console.log('THE USER IS: ', this.userInfo);
+    }))
+    .catch(err => {
+      console.log(err)
+
+    });
 
         /* subscribe to new users being created */
         this.subscription = <Subscription>(

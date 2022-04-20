@@ -82,5 +82,12 @@ export class ActivitiesComponent implements OnInit {
   })
   }
   
+  async deleteActivity(element:any){
+    console.log(element.id, 'will be deleted!');
+    await this.api.DeleteActivity({id: element.id}).catch(err => {
+      console.log('Error occured, activity cannot be deleted!: ', err);
+    });
+    console.log(element, 'has been deleted!');
+  }
  
 }

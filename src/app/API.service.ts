@@ -77,6 +77,7 @@ export type User = {
   imageurl?: string | null;
   email?: string | null;
   activities?: ModelActivityConnection;
+  jobs?: ModelJobsConnection;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -142,6 +143,31 @@ export type Comment = {
   id?: string;
   content?: string | null;
   post?: Post;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type ModelJobsConnection = {
+  __typename: "ModelJobsConnection";
+  items?: Array<Jobs | null>;
+  nextToken?: string | null;
+};
+
+export type Jobs = {
+  __typename: "Jobs";
+  id?: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: Event;
+  user?: User;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -280,6 +306,58 @@ export type DeleteActivityInput = {
   id: string;
 };
 
+export type CreateJobsInput = {
+  id?: string | null;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  jobsEventId?: string | null;
+  jobsUserId?: string | null;
+};
+
+export type ModelJobsConditionInput = {
+  jobname?: ModelStringInput | null;
+  jobdescription?: ModelStringInput | null;
+  owneId?: ModelStringInput | null;
+  jobreported?: ModelBooleanInput | null;
+  jobcompleted?: ModelBooleanInput | null;
+  jobeventId?: ModelStringInput | null;
+  jobeventTitle?: ModelStringInput | null;
+  jobpostId?: ModelStringInput | null;
+  jobposttitle?: ModelStringInput | null;
+  reccordState?: ModelStringInput | null;
+  and?: Array<ModelJobsConditionInput | null> | null;
+  or?: Array<ModelJobsConditionInput | null> | null;
+  not?: ModelJobsConditionInput | null;
+};
+
+export type UpdateJobsInput = {
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  jobsEventId?: string | null;
+  jobsUserId?: string | null;
+};
+
+export type DeleteJobsInput = {
+  id: string;
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null;
   username?: ModelStringInput | null;
@@ -360,6 +438,23 @@ export type ModelActivityFilterInput = {
   not?: ModelActivityFilterInput | null;
 };
 
+export type ModelJobsFilterInput = {
+  id?: ModelIDInput | null;
+  jobname?: ModelStringInput | null;
+  jobdescription?: ModelStringInput | null;
+  owneId?: ModelStringInput | null;
+  jobreported?: ModelBooleanInput | null;
+  jobcompleted?: ModelBooleanInput | null;
+  jobeventId?: ModelStringInput | null;
+  jobeventTitle?: ModelStringInput | null;
+  jobpostId?: ModelStringInput | null;
+  jobposttitle?: ModelStringInput | null;
+  reccordState?: ModelStringInput | null;
+  and?: Array<ModelJobsFilterInput | null> | null;
+  or?: Array<ModelJobsFilterInput | null> | null;
+  not?: ModelJobsFilterInput | null;
+};
+
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
@@ -380,6 +475,26 @@ export type CreateUserMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -414,6 +529,26 @@ export type UpdateUserMutation = {
     } | null>;
     nextToken?: string | null;
   } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -438,6 +573,26 @@ export type DeleteUserMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -790,6 +945,10 @@ export type CreateActivityMutation = {
       __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -832,6 +991,10 @@ export type UpdateActivityMutation = {
     email?: string | null;
     activities?: {
       __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -878,6 +1041,163 @@ export type DeleteActivityMutation = {
       __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateJobsMutation = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateJobsMutation = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteJobsMutation = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -910,6 +1230,26 @@ export type GetUserQuery = {
     } | null>;
     nextToken?: string | null;
   } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -926,6 +1266,10 @@ export type ListUsersQuery = {
     email?: string | null;
     activities?: {
       __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1139,6 +1483,10 @@ export type GetActivityQuery = {
       __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1158,6 +1506,96 @@ export type ListActivitysQuery = {
     completed?: boolean | null;
     eventId?: string | null;
     eventTitle?: string | null;
+    event?: {
+      __typename: "Event";
+      id: string;
+      eventtitle: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    user?: {
+      __typename: "User";
+      id: string;
+      username: string;
+      firstname?: string | null;
+      secondname?: string | null;
+      imageurl?: string | null;
+      email?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetJobsQuery = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListJobssQuery = {
+  __typename: "ModelJobsConnection";
+  items: Array<{
+    __typename: "Jobs";
+    id: string;
+    jobname?: string | null;
+    jobdescription?: string | null;
+    owneId?: string | null;
+    jobreported?: boolean | null;
+    jobcompleted?: boolean | null;
+    jobeventId?: string | null;
+    jobeventTitle?: string | null;
+    jobpostId?: string | null;
+    jobposttitle?: string | null;
+    reccordState?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -1207,6 +1645,26 @@ export type OnCreateUserSubscription = {
     } | null>;
     nextToken?: string | null;
   } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1236,6 +1694,26 @@ export type OnUpdateUserSubscription = {
     } | null>;
     nextToken?: string | null;
   } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1260,6 +1738,26 @@ export type OnDeleteUserSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+  jobs?: {
+    __typename: "ModelJobsConnection";
+    items: Array<{
+      __typename: "Jobs";
+      id: string;
+      jobname?: string | null;
+      jobdescription?: string | null;
+      owneId?: string | null;
+      jobreported?: boolean | null;
+      jobcompleted?: boolean | null;
+      jobeventId?: string | null;
+      jobeventTitle?: string | null;
+      jobpostId?: string | null;
+      jobposttitle?: string | null;
+      reccordState?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1612,6 +2110,10 @@ export type OnCreateActivitySubscription = {
       __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1654,6 +2156,10 @@ export type OnUpdateActivitySubscription = {
     email?: string | null;
     activities?: {
       __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1700,6 +2206,163 @@ export type OnDeleteActivitySubscription = {
       __typename: "ModelActivityConnection";
       nextToken?: string | null;
     } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateJobsSubscription = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateJobsSubscription = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteJobsSubscription = {
+  __typename: "Jobs";
+  id: string;
+  jobname?: string | null;
+  jobdescription?: string | null;
+  owneId?: string | null;
+  jobreported?: boolean | null;
+  jobcompleted?: boolean | null;
+  jobeventId?: string | null;
+  jobeventTitle?: string | null;
+  jobpostId?: string | null;
+  jobposttitle?: string | null;
+  reccordState?: string | null;
+  event?: {
+    __typename: "Event";
+    id: string;
+    eventtitle: string;
+    posts?: {
+      __typename: "ModelPostConnection";
+      nextToken?: string | null;
+    } | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  user?: {
+    __typename: "User";
+    id: string;
+    username: string;
+    firstname?: string | null;
+    secondname?: string | null;
+    imageurl?: string | null;
+    email?: string | null;
+    activities?: {
+      __typename: "ModelActivityConnection";
+      nextToken?: string | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelJobsConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1736,6 +2399,26 @@ export class APIService {
               completed
               eventId
               eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
               createdAt
               updatedAt
             }
@@ -1786,6 +2469,26 @@ export class APIService {
             }
             nextToken
           }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1826,6 +2529,26 @@ export class APIService {
               completed
               eventId
               eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
               createdAt
               updatedAt
             }
@@ -2338,6 +3061,10 @@ export class APIService {
               __typename
               nextToken
             }
+            jobs {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -2395,6 +3122,10 @@ export class APIService {
             imageurl
             email
             activities {
+              __typename
+              nextToken
+            }
+            jobs {
               __typename
               nextToken
             }
@@ -2458,6 +3189,10 @@ export class APIService {
               __typename
               nextToken
             }
+            jobs {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -2475,6 +3210,207 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteActivityMutation>response.data.deleteActivity;
+  }
+  async CreateJobs(
+    input: CreateJobsInput,
+    condition?: ModelJobsConditionInput
+  ): Promise<CreateJobsMutation> {
+    const statement = `mutation CreateJobs($input: CreateJobsInput!, $condition: ModelJobsConditionInput) {
+        createJobs(input: $input, condition: $condition) {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateJobsMutation>response.data.createJobs;
+  }
+  async UpdateJobs(
+    input: UpdateJobsInput,
+    condition?: ModelJobsConditionInput
+  ): Promise<UpdateJobsMutation> {
+    const statement = `mutation UpdateJobs($input: UpdateJobsInput!, $condition: ModelJobsConditionInput) {
+        updateJobs(input: $input, condition: $condition) {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateJobsMutation>response.data.updateJobs;
+  }
+  async DeleteJobs(
+    input: DeleteJobsInput,
+    condition?: ModelJobsConditionInput
+  ): Promise<DeleteJobsMutation> {
+    const statement = `mutation DeleteJobs($input: DeleteJobsInput!, $condition: ModelJobsConditionInput) {
+        deleteJobs(input: $input, condition: $condition) {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteJobsMutation>response.data.deleteJobs;
   }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
@@ -2498,6 +3434,26 @@ export class APIService {
               completed
               eventId
               eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
               createdAt
               updatedAt
             }
@@ -2532,6 +3488,10 @@ export class APIService {
             imageurl
             email
             activities {
+              __typename
+              nextToken
+            }
+            jobs {
               __typename
               nextToken
             }
@@ -2856,6 +3816,10 @@ export class APIService {
               __typename
               nextToken
             }
+            jobs {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -2928,6 +3892,127 @@ export class APIService {
     )) as any;
     return <ListActivitysQuery>response.data.listActivitys;
   }
+  async GetJobs(id: string): Promise<GetJobsQuery> {
+    const statement = `query GetJobs($id: ID!) {
+        getJobs(id: $id) {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetJobsQuery>response.data.getJobs;
+  }
+  async ListJobss(
+    filter?: ModelJobsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListJobssQuery> {
+    const statement = `query ListJobss($filter: ModelJobsFilterInput, $limit: Int, $nextToken: String) {
+        listJobss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            jobname
+            jobdescription
+            owneId
+            jobreported
+            jobcompleted
+            jobeventId
+            jobeventTitle
+            jobpostId
+            jobposttitle
+            reccordState
+            event {
+              __typename
+              id
+              eventtitle
+              createdAt
+              updatedAt
+            }
+            user {
+              __typename
+              id
+              username
+              firstname
+              secondname
+              imageurl
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListJobssQuery>response.data.listJobss;
+  }
   OnCreateUserListener: Observable<
     SubscriptionResponse<OnCreateUserSubscription>
   > = API.graphql(
@@ -2953,6 +4038,26 @@ export class APIService {
               completed
               eventId
               eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
               createdAt
               updatedAt
             }
@@ -2995,6 +4100,26 @@ export class APIService {
             }
             nextToken
           }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -3027,6 +4152,26 @@ export class APIService {
               completed
               eventId
               eventTitle
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              jobname
+              jobdescription
+              owneId
+              jobreported
+              jobcompleted
+              jobeventId
+              jobeventTitle
+              jobpostId
+              jobposttitle
+              reccordState
               createdAt
               updatedAt
             }
@@ -3459,6 +4604,10 @@ export class APIService {
               __typename
               nextToken
             }
+            jobs {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -3508,6 +4657,10 @@ export class APIService {
             imageurl
             email
             activities {
+              __typename
+              nextToken
+            }
+            jobs {
               __typename
               nextToken
             }
@@ -3563,6 +4716,10 @@ export class APIService {
               __typename
               nextToken
             }
+            jobs {
+              __typename
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -3572,4 +4729,181 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteActivitySubscription>>;
+
+  OnCreateJobsListener: Observable<
+    SubscriptionResponse<OnCreateJobsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateJobs {
+        onCreateJobs {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateJobsSubscription>>;
+
+  OnUpdateJobsListener: Observable<
+    SubscriptionResponse<OnUpdateJobsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateJobs {
+        onUpdateJobs {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateJobsSubscription>>;
+
+  OnDeleteJobsListener: Observable<
+    SubscriptionResponse<OnDeleteJobsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteJobs {
+        onDeleteJobs {
+          __typename
+          id
+          jobname
+          jobdescription
+          owneId
+          jobreported
+          jobcompleted
+          jobeventId
+          jobeventTitle
+          jobpostId
+          jobposttitle
+          reccordState
+          event {
+            __typename
+            id
+            eventtitle
+            posts {
+              __typename
+              nextToken
+            }
+            activities {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          user {
+            __typename
+            id
+            username
+            firstname
+            secondname
+            imageurl
+            email
+            activities {
+              __typename
+              nextToken
+            }
+            jobs {
+              __typename
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteJobsSubscription>>;
 }
