@@ -13,6 +13,7 @@ type User @model
 type Event @model {
   id: ID!
   eventtitle: String!
+  image: String
   posts: [Post] @connection(name: "EventPosts")
   activities: [Activity] @connection(name: "EventActivity")
 }

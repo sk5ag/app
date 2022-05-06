@@ -1,17 +1,10 @@
-<div class="container">
-    <mat-toolbar>
-        <span>SUBJECTS</span>
-        <span class="fill-remaining-space"></span>
-        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>help</mat-icon></button>
-    </mat-toolbar>
-</div>
-<br>
+<app-toolbar></app-toolbar>
 <div class="form-body">
-    <form autocomplete="off" [formGroup]="createEventForm" (ngSubmit)="onCreateEvent(createEventForm.value)">
+    <div class="expansion-half-width">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <form autocomplete="off" [formGroup]="createEventForm" (ngSubmit)="onCreateEvent(createEventForm.value)">
 
-        <div class="expansion-half-width">
-            <mat-accordion class="example-headers-align">
-                <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             Add New Subject
@@ -27,13 +20,38 @@
                         </mat-form-field>
                     </div>
                     <mat-action-row>
-                        <button mat-button color="primary" type="submit" [disabled]="createEventForm.invalid">Submit</button>
+                        <!-- <button mat-button color="primary" type="submit" [disabled]="createEventForm.invalid">Submit</button> -->
+                        <button mat-button color="primary" (click)="nextStep()">Next</button>
                     </mat-action-row>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
+                </form>
 
-    </form>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" [disabled]="createEventForm.invalid" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Subject Image
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <span class="fill-remaining-space"></span>
+
+                        <mat-icon>image</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Country</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                    <button mat-button color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
 </div>
 
 <div class="expansion-half-width">
@@ -73,7 +91,7 @@
         </ng-container>
 
         <!-- Actions Column -->
-        <ng-container matColumnDef="Actions">
+        <ng-container matColumnDef="Actions" stickyEnd>
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button color="primary" (click)="openPost(element)"><mat-icon>settings</mat-icon></button>
@@ -88,3 +106,4 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>
+<br><br>

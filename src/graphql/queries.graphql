@@ -73,6 +73,7 @@ query GetEvent($id: ID!) {
   getEvent(id: $id) {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -112,6 +113,7 @@ query ListEvents(
     items {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -133,6 +135,7 @@ query GetPost($id: ID!) {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -169,6 +172,7 @@ query ListPosts(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -193,6 +197,7 @@ query GetComment($id: ID!) {
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -242,6 +247,7 @@ query GetActivity($id: ID!) {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -289,6 +295,7 @@ query ListActivitys(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -324,6 +331,7 @@ query GetJobs($id: ID!) {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -374,6 +382,7 @@ query ListJobss(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }

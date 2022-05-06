@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit {
   eventtitle = new FormControl('', [Validators.required]);
   isDisabled = false;
   searchKey: string ="";
-
+  step = 0;
 
   // displayedColumns: string[] = ['id', 'eventtitle', 'createdAt', 'updatedAt', 'Actions'];
   displayedColumns: string[] = ['eventtitle', 'Actions'];
@@ -38,6 +38,18 @@ export class EventsComponent implements OnInit {
     this.createEventForm = this.fb.group({
       eventtitle: ["", Validators.required]
     });
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 
   getErrorMessage() {
@@ -135,9 +147,21 @@ printOut(element: any){
 
 onCreateEvent(newevent: any){
   // console.log('New Event ', newevent)
-  this.api.CreateEvent(newevent);
-  this.openSnackBar('Event created', 'close', 'end', 'top')
 
+    if (newevent.eventtitle != null && newevent.eventtitle != "") {
+      this.api.CreateEvent(newevent)
+      .then((event) => {
+        this.openSnackBar('Event created: '+ event.eventtitle, 'close', 'end', 'top')
+        
+      }).catch(err => {
+        console.log(err),
+        this.openSnackBar('Error occured!', 'close', 'center', 'bottom')
+      });
+      this.createEventForm.reset();
+    } else{
+      this.openSnackBar('Subject title is missing!', 'close', 'center', 'bottom');
+      this.step = 0;
+    }
 }
 onDeleteEvent(deleteevent:any){
   // console.log('DELETE Event ', deleteevent)

@@ -1,66 +1,61 @@
-<amplify-authenticator>
-    <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
-        <div>
-            <h1>Welcome {{ user.username }}!</h1>
-            <button (click)="signOut()">Sign Out</button>
-        </div>
-
-        <div class="content-area">
-            <mat-card>
-                <mat-card-header>
-                    <div class="items-position">
-                        <amplify-s3-image path="/" img-key="Female.png"></amplify-s3-image>
-                        <button mat-mini-fab color="none" (click)="onUploadImage()">
-                            <mat-icon>edit</mat-icon>
+<div class="content-area">
+    <mat-card>
+        <mat-card-header>
+            <div class="items-position" *ngIf="imgExist===true; else elseBlock">
+                <amplify-s3-image level="private" imgKey="{{imageKey}}"></amplify-s3-image>
+                <br>
+            </div>
+            <ng-template #elseBlock>
+                Upload an Image
+            </ng-template>
+            <div>
+                <button mat-mini-fab color="none" (click)="onUploadImage()">
+                            <mat-icon>change_circle</mat-icon>
                         </button>
-                    </div>
-
-                </mat-card-header>
-                <mat-card-content>
-                    <br>
-                    <div class="form-body">
-                        <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
-                            <div>
-                                <label>id: </label>
-                                <input type="text" formControlName="id" autocomplete="off" />
-                            </div>
-                            <div>
-                                <label>Username: </label>
-                                <input type="text" formControlName="username" autocomplete="off" />
-                            </div>
-                            <div>
-                                <label>Firstname: </label>
-                                <input type="text" formControlName="firstname" autocomplete="off" />
-                            </div>
-                            <div>
-                                <label>Secondname: </label>
-                                <input type="text" formControlName="secondname" autocomplete="off" />
-                            </div>
-                            <div>
-                                <label>Email: </label>
-                                <input type="text" formControlName="email" autocomplete="off" />
-                            </div>
-                            <div>
-                                <label>Image URL: </label>
-                                <input type="text" formControlName="imageurl" autocomplete="off" />
-                            </div>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <br>
-        <div class="content-area" *ngFor="let user of users">
+            </div>
+        </mat-card-header>
+        <mat-card-content>
             <br>
-            <div>{{ user.username }}</div>
-            <div>{{ user.email }}</div>
-            <div>{{ user.firstname }}</div>
-            <div>{{ user.secondname }}</div>
-            <div>{{ user.imageurl }}</div>
-            <br>
-        </div>
-    </ng-template>
+            <div class="form-body">
+                <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
+                    <div>
+                        <label>id: </label>
+                        <input type="text" formControlName="id" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label>Username: </label>
+                        <input type="text" formControlName="username" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label>Firstname: </label>
+                        <input type="text" formControlName="firstname" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label>Secondname: </label>
+                        <input type="text" formControlName="secondname" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label>Email: </label>
+                        <input type="text" formControlName="email" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label>Image URL: </label>
+                        <input type="text" formControlName="imageurl" autocomplete="off" />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
 
-</amplify-authenticator>
+<br>
+<div class="content-area" *ngFor="let user of users">
+    <br>
+    <div>{{ user.username }}</div>
+    <div>{{ user.email }}</div>
+    <div>{{ user.firstname }}</div>
+    <div>{{ user.secondname }}</div>
+    <div>{{ user.imageurl }}</div>
+    <br>
+</div>

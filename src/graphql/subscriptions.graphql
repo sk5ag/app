@@ -138,6 +138,7 @@ subscription OnCreateEvent {
   onCreateEvent {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -172,6 +173,7 @@ subscription OnUpdateEvent {
   onUpdateEvent {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -206,6 +208,7 @@ subscription OnDeleteEvent {
   onDeleteEvent {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -245,6 +248,7 @@ subscription OnCreatePost {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -276,6 +280,7 @@ subscription OnUpdatePost {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -307,6 +312,7 @@ subscription OnDeletePost {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -341,6 +347,7 @@ subscription OnCreateComment {
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -366,6 +373,7 @@ subscription OnUpdateComment {
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -391,6 +399,7 @@ subscription OnDeleteComment {
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -417,6 +426,7 @@ subscription OnCreateActivity {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -459,6 +469,7 @@ subscription OnUpdateActivity {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -501,6 +512,7 @@ subscription OnDeleteActivity {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -546,6 +558,7 @@ subscription OnCreateJobs {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -591,6 +604,7 @@ subscription OnUpdateJobs {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -636,6 +650,7 @@ subscription OnDeleteJobs {
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }

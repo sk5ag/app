@@ -28,6 +28,7 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   //   /* fetch users when app loads */
   //   await this.api.ListEvents().then((event) => {
   //   this.events = event.items as Event[];

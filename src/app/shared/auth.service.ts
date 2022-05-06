@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AmplifyAuth0Button } from '@aws-amplify/ui-angular/legacy/proxies';
 import { Auth } from 'aws-amplify';
 
 @Injectable({
@@ -26,4 +27,5 @@ export class AuthService {
       console.log(error)
     }
 } 
+
 }

@@ -108,6 +108,7 @@ export type Event = {
   __typename: "Event";
   id?: string;
   eventtitle?: string;
+  image?: string | null;
   posts?: ModelPostConnection;
   activities?: ModelActivityConnection;
   createdAt?: string;
@@ -188,10 +189,12 @@ export type DeleteUserInput = {
 export type CreateEventInput = {
   id?: string | null;
   eventtitle: string;
+  image?: string | null;
 };
 
 export type ModelEventConditionInput = {
   eventtitle?: ModelStringInput | null;
+  image?: ModelStringInput | null;
   and?: Array<ModelEventConditionInput | null> | null;
   or?: Array<ModelEventConditionInput | null> | null;
   not?: ModelEventConditionInput | null;
@@ -200,6 +203,7 @@ export type ModelEventConditionInput = {
 export type UpdateEventInput = {
   id: string;
   eventtitle?: string | null;
+  image?: string | null;
 };
 
 export type DeleteEventInput = {
@@ -395,6 +399,7 @@ export type ModelUserConnection = {
 export type ModelEventFilterInput = {
   id?: ModelIDInput | null;
   eventtitle?: ModelStringInput | null;
+  image?: ModelStringInput | null;
   and?: Array<ModelEventFilterInput | null> | null;
   or?: Array<ModelEventFilterInput | null> | null;
   not?: ModelEventFilterInput | null;
@@ -606,6 +611,7 @@ export type CreateEventMutation = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -644,6 +650,7 @@ export type UpdateEventMutation = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -682,6 +689,7 @@ export type DeleteEventMutation = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -726,6 +734,7 @@ export type CreatePostMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -762,6 +771,7 @@ export type UpdatePostMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -798,6 +808,7 @@ export type DeletePostMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -838,6 +849,7 @@ export type CreateCommentMutation = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -866,6 +878,7 @@ export type UpdateCommentMutation = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -894,6 +907,7 @@ export type DeleteCommentMutation = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -922,6 +936,7 @@ export type CreateActivityMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -970,6 +985,7 @@ export type UpdateActivityMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1018,6 +1034,7 @@ export type DeleteActivityMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1069,6 +1086,7 @@ export type CreateJobsMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1120,6 +1138,7 @@ export type UpdateJobsMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1171,6 +1190,7 @@ export type DeleteJobsMutation = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1282,6 +1302,7 @@ export type GetEventQuery = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -1322,6 +1343,7 @@ export type ListEventsQuery = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1346,6 +1368,7 @@ export type GetPostQuery = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1384,6 +1407,7 @@ export type ListPostsQuery = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1411,6 +1435,7 @@ export type GetCommentQuery = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1460,6 +1485,7 @@ export type GetActivityQuery = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1510,6 +1536,7 @@ export type ListActivitysQuery = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1547,6 +1574,7 @@ export type GetJobsQuery = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1600,6 +1628,7 @@ export type ListJobssQuery = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1771,6 +1800,7 @@ export type OnCreateEventSubscription = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -1809,6 +1839,7 @@ export type OnUpdateEventSubscription = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -1847,6 +1878,7 @@ export type OnDeleteEventSubscription = {
   __typename: "Event";
   id: string;
   eventtitle: string;
+  image?: string | null;
   posts?: {
     __typename: "ModelPostConnection";
     items: Array<{
@@ -1891,6 +1923,7 @@ export type OnCreatePostSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1927,6 +1960,7 @@ export type OnUpdatePostSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -1963,6 +1997,7 @@ export type OnDeletePostSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2003,6 +2038,7 @@ export type OnCreateCommentSubscription = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2031,6 +2067,7 @@ export type OnUpdateCommentSubscription = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2059,6 +2096,7 @@ export type OnDeleteCommentSubscription = {
       __typename: "Event";
       id: string;
       eventtitle: string;
+      image?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2087,6 +2125,7 @@ export type OnCreateActivitySubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2135,6 +2174,7 @@ export type OnUpdateActivitySubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2183,6 +2223,7 @@ export type OnDeleteActivitySubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2234,6 +2275,7 @@ export type OnCreateJobsSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2285,6 +2327,7 @@ export type OnUpdateJobsSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2336,6 +2379,7 @@ export type OnDeleteJobsSubscription = {
     __typename: "Event";
     id: string;
     eventtitle: string;
+    image?: string | null;
     posts?: {
       __typename: "ModelPostConnection";
       nextToken?: string | null;
@@ -2578,6 +2622,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -2632,6 +2677,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -2686,6 +2732,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -2746,6 +2793,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -2798,6 +2846,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -2850,6 +2899,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -2906,6 +2956,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -2950,6 +3001,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -2994,6 +3046,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -3038,6 +3091,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3102,6 +3156,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3166,6 +3221,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3233,6 +3289,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3300,6 +3357,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3367,6 +3425,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3522,6 +3581,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -3576,6 +3636,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3617,6 +3678,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3669,6 +3731,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -3713,6 +3776,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -3793,6 +3857,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3857,6 +3922,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -3911,6 +3977,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -3978,6 +4045,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -4193,6 +4261,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -4239,6 +4308,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -4285,6 +4355,7 @@ export class APIService {
           __typename
           id
           eventtitle
+          image
           posts {
             __typename
             items {
@@ -4337,6 +4408,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4381,6 +4453,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4425,6 +4498,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4473,6 +4547,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -4509,6 +4584,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -4545,6 +4621,7 @@ export class APIService {
               __typename
               id
               eventtitle
+              image
               createdAt
               updatedAt
             }
@@ -4581,6 +4658,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4637,6 +4715,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4693,6 +4772,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4752,6 +4832,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4811,6 +4892,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken
@@ -4870,6 +4952,7 @@ export class APIService {
             __typename
             id
             eventtitle
+            image
             posts {
               __typename
               nextToken

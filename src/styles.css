@@ -100,3 +100,7 @@ div.container {
     height: 32px;
     width: 32px;
 }
+
+.card-bottons {
+    text-align: end;
+}

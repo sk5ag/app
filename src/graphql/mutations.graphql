@@ -150,6 +150,7 @@ mutation CreateEvent(
   createEvent(input: $input, condition: $condition) {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -187,6 +188,7 @@ mutation UpdateEvent(
   updateEvent(input: $input, condition: $condition) {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -224,6 +226,7 @@ mutation DeleteEvent(
   deleteEvent(input: $input, condition: $condition) {
     id
     eventtitle
+    image
     posts {
       items {
         id
@@ -266,6 +269,7 @@ mutation CreatePost(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -300,6 +304,7 @@ mutation UpdatePost(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -334,6 +339,7 @@ mutation DeletePost(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -371,6 +377,7 @@ mutation CreateComment(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -399,6 +406,7 @@ mutation UpdateComment(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -427,6 +435,7 @@ mutation DeleteComment(
       event {
         id
         eventtitle
+        image
         createdAt
         updatedAt
       }
@@ -456,6 +465,7 @@ mutation CreateActivity(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -501,6 +511,7 @@ mutation UpdateActivity(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -546,6 +557,7 @@ mutation DeleteActivity(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -594,6 +606,7 @@ mutation CreateJobs(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -642,6 +655,7 @@ mutation UpdateJobs(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }
@@ -690,6 +704,7 @@ mutation DeleteJobs(
     event {
       id
       eventtitle
+      image
       posts {
         nextToken
       }

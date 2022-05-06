@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { APIService, User, Event } from "../API.service";
-import { AuthService } from '../Auth/auth.service';
-import { UploadProfileImageComponent } from './upload-profile-image/upload-profile-image.component';
-
+import { AuthService } from '../shared/auth.service';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { FilesHandlerService } from '../shared/files-handler.service';
+import { Storage } from 'aws-amplify';
 
 @Component({
   selector: 'app-profile',
@@ -21,15 +21,24 @@ export class ProfileComponent implements OnInit{
     public users: Array<User> = [];
     public events: Array<Event> = []; 
     public userInfo: Array<User> = [];
-
+    
+    userId = "";
+    public myImage: string | undefined;
+    imageKey:string | undefined ="";
+    imgExist: boolean = false;
     private subscription: Subscription | null = null;
 
   constructor(
     private api: APIService, 
     private fb: FormBuilder, 
     public dialog: MatDialog,
-    public authService: AuthService
+    public authService: AuthService,
+    public myfiles: FilesHandlerService
     ) {
+
+      this.loadProfileImage();
+      // this.listImages();
+
     this.createForm = this.fb.group({
       id: [""],
       username: ["", Validators.required],
@@ -39,25 +48,15 @@ export class ProfileComponent implements OnInit{
       email: ["", Validators.required],
     });
   }
-
+ 
   async ngOnInit() {
-
+    await this.listImages();
     this.authService.loggedIn().then(res => {
       console.log('Logged IN User is: ', res)
     })
     .catch(err => {
       console.log(err);
     });
-
-    this.authService.whichUser().then((res => {
-      this.userInfo = res;
-      console.log('THE USER IS: ', this.userInfo);
-    }))
-    .catch(err => {
-      console.log(err)
-
-    });
-
         /* subscribe to new users being created */
         this.subscription = <Subscription>(
           this.api.OnCreateUserListener.subscribe((event: any) => {
@@ -65,9 +64,7 @@ export class ProfileComponent implements OnInit{
             this.users = [newUser, ...this.users];
           })
         );
-
   }
-
 
   populateForm(data: User[]){
 
@@ -81,6 +78,51 @@ export class ProfileComponent implements OnInit{
       email: data[0].email
     })
 
+  }
+
+  loadProfileImage(){
+    this.authService.whichUser().then(async (event)=> {
+      // this.imageKey = "NewProfileImage/"+ event.attributes.sub + ".jpg";
+      await this.listImages()
+      this.getImage( this.imageKey );
+    })
+  }
+
+  getImage(_imgKey: string | undefined){
+
+    if (_imgKey){
+      Storage.get(_imgKey, { level: 'private' })
+      .then ( (result) => { 
+        console.log('1.', result); 
+        this.imageKey = result;
+        console.log('2. imageKey: ', this.imageKey)
+      })
+      .catch( (err) => { 
+        console.log('3. No Image Found',err);
+      });
+
+    }else{
+      console.log('Image was undefined!')
+    }
+
+  }
+
+  async listImages(){
+    await Storage.list('NewProfileImage/', { level: 'private' })
+      .then ( (result) => { 
+        console.log('LENGNTH: ', result.length);
+        if (result.length > 0){
+          this.imgExist = true;
+        }
+        result.map((r)=> {
+          this.imageKey = r.key;
+          console.log('While list image is processed: ', this.myImage);
+          return this.myImage
+        })
+      })
+      .catch( (err) => { 
+        console.log(err);
+      });
   }
 
   public onCreate(user: any) {
@@ -101,8 +143,8 @@ export class ProfileComponent implements OnInit{
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     // dialogConfig.width = "75%";
-    // dialogConfig.height = "90%";
-    this.dialog.open(UploadProfileImageComponent, dialogConfig)
+    dialogConfig.height = "auto";
+    this.dialog.open(ImageUploadComponent, dialogConfig)
   }
 
   ngOnDestroy() {

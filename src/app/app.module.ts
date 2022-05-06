@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { LegacyAmplifyUiModule } from '@aws-amplify/ui-angular/legacy';
 
+
 /* new form imports */
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -36,6 +37,8 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityComponent } from './activities/activity/activity.component';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 
@@ -52,7 +55,9 @@ import { HomeComponent } from './home/home.component';
     CommentComponent,
     ActivitiesComponent,
     ActivityComponent,
-    HomeComponent
+    HomeComponent,
+    ImageUploadComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

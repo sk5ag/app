@@ -1,0 +1,25 @@
+<div>
+    <mat-card class="example-card">
+        <mat-card-header>
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <mat-card-title>Upload Image</mat-card-title>
+            <mat-card-subtitle>Only upload '.jpg' or '.png' files.</mat-card-subtitle>
+        </mat-card-header>
+        <input hidden type="file" id="input-file-id" (change)="onFileSelected($event)">
+        <label for="input-file-id">
+            <img mat-card-image src="../assets/images/uploadImage.png" alt="Upload images">
+        </label>
+        <mat-card-content>
+            <p>
+                System accepts '.jpeg' and '.png' file types only.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="card-bottons">
+                <!-- <button mat-button>LIKE</button> -->
+                <button mat-button (click)="uploadFile()">UPLOAD</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
