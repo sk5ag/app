@@ -100,6 +100,7 @@ export type Activity = {
   eventTitle?: string | null;
   event?: Event;
   user?: User;
+  activityPostId?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -167,6 +168,7 @@ export type Jobs = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: Event;
   user?: User;
   createdAt?: string;
@@ -276,6 +278,7 @@ export type CreateActivityInput = {
   completed?: boolean | null;
   eventId?: string | null;
   eventTitle?: string | null;
+  activityPostId?: string | null;
   activityEventId?: string | null;
   activityUserId?: string | null;
 };
@@ -288,6 +291,7 @@ export type ModelActivityConditionInput = {
   completed?: ModelBooleanInput | null;
   eventId?: ModelStringInput | null;
   eventTitle?: ModelStringInput | null;
+  activityPostId?: ModelStringInput | null;
   and?: Array<ModelActivityConditionInput | null> | null;
   or?: Array<ModelActivityConditionInput | null> | null;
   not?: ModelActivityConditionInput | null;
@@ -302,6 +306,7 @@ export type UpdateActivityInput = {
   completed?: boolean | null;
   eventId?: string | null;
   eventTitle?: string | null;
+  activityPostId?: string | null;
   activityEventId?: string | null;
   activityUserId?: string | null;
 };
@@ -322,6 +327,7 @@ export type CreateJobsInput = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   jobsEventId?: string | null;
   jobsUserId?: string | null;
 };
@@ -337,6 +343,7 @@ export type ModelJobsConditionInput = {
   jobpostId?: ModelStringInput | null;
   jobposttitle?: ModelStringInput | null;
   reccordState?: ModelStringInput | null;
+  postId?: ModelStringInput | null;
   and?: Array<ModelJobsConditionInput | null> | null;
   or?: Array<ModelJobsConditionInput | null> | null;
   not?: ModelJobsConditionInput | null;
@@ -354,6 +361,7 @@ export type UpdateJobsInput = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   jobsEventId?: string | null;
   jobsUserId?: string | null;
 };
@@ -438,6 +446,7 @@ export type ModelActivityFilterInput = {
   completed?: ModelBooleanInput | null;
   eventId?: ModelStringInput | null;
   eventTitle?: ModelStringInput | null;
+  activityPostId?: ModelStringInput | null;
   and?: Array<ModelActivityFilterInput | null> | null;
   or?: Array<ModelActivityFilterInput | null> | null;
   not?: ModelActivityFilterInput | null;
@@ -455,6 +464,7 @@ export type ModelJobsFilterInput = {
   jobpostId?: ModelStringInput | null;
   jobposttitle?: ModelStringInput | null;
   reccordState?: ModelStringInput | null;
+  postId?: ModelStringInput | null;
   and?: Array<ModelJobsFilterInput | null> | null;
   or?: Array<ModelJobsFilterInput | null> | null;
   not?: ModelJobsFilterInput | null;
@@ -480,6 +490,7 @@ export type CreateUserMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -500,6 +511,7 @@ export type CreateUserMutation = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -529,6 +541,7 @@ export type UpdateUserMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -549,6 +562,7 @@ export type UpdateUserMutation = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -578,6 +592,7 @@ export type DeleteUserMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -598,6 +613,7 @@ export type DeleteUserMutation = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -637,6 +653,7 @@ export type CreateEventMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -676,6 +693,7 @@ export type UpdateEventMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -715,6 +733,7 @@ export type DeleteEventMutation = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -967,6 +986,7 @@ export type CreateActivityMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1016,6 +1036,7 @@ export type UpdateActivityMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1065,6 +1086,7 @@ export type DeleteActivityMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1082,6 +1104,7 @@ export type CreateJobsMutation = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -1134,6 +1157,7 @@ export type UpdateJobsMutation = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -1186,6 +1210,7 @@ export type DeleteJobsMutation = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -1245,6 +1270,7 @@ export type GetUserQuery = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1265,6 +1291,7 @@ export type GetUserQuery = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1328,6 +1355,7 @@ export type GetEventQuery = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1516,6 +1544,7 @@ export type GetActivityQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1551,6 +1580,7 @@ export type ListActivitysQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    activityPostId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -1570,6 +1600,7 @@ export type GetJobsQuery = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -1624,6 +1655,7 @@ export type ListJobssQuery = {
     jobpostId?: string | null;
     jobposttitle?: string | null;
     reccordState?: string | null;
+    postId?: string | null;
     event?: {
       __typename: "Event";
       id: string;
@@ -1669,6 +1701,7 @@ export type OnCreateUserSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1689,6 +1722,7 @@ export type OnCreateUserSubscription = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1718,6 +1752,7 @@ export type OnUpdateUserSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1738,6 +1773,7 @@ export type OnUpdateUserSubscription = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1767,6 +1803,7 @@ export type OnDeleteUserSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1787,6 +1824,7 @@ export type OnDeleteUserSubscription = {
       jobpostId?: string | null;
       jobposttitle?: string | null;
       reccordState?: string | null;
+      postId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1826,6 +1864,7 @@ export type OnCreateEventSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1865,6 +1904,7 @@ export type OnUpdateEventSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1904,6 +1944,7 @@ export type OnDeleteEventSubscription = {
       completed?: boolean | null;
       eventId?: string | null;
       eventTitle?: string | null;
+      activityPostId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2156,6 +2197,7 @@ export type OnCreateActivitySubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2205,6 +2247,7 @@ export type OnUpdateActivitySubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2254,6 +2297,7 @@ export type OnDeleteActivitySubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  activityPostId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2271,6 +2315,7 @@ export type OnCreateJobsSubscription = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -2323,6 +2368,7 @@ export type OnUpdateJobsSubscription = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -2375,6 +2421,7 @@ export type OnDeleteJobsSubscription = {
   jobpostId?: string | null;
   jobposttitle?: string | null;
   reccordState?: string | null;
+  postId?: string | null;
   event?: {
     __typename: "Event";
     id: string;
@@ -2443,6 +2490,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -2463,6 +2511,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -2508,6 +2557,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -2528,6 +2578,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -2573,6 +2624,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -2593,6 +2645,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -2648,6 +2701,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -2703,6 +2757,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -2758,6 +2813,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -3122,6 +3178,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -3187,6 +3244,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -3252,6 +3310,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -3285,6 +3344,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -3353,6 +3413,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -3421,6 +3482,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -3493,6 +3555,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -3513,6 +3576,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -3607,6 +3671,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -3888,6 +3953,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -3937,6 +4003,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            activityPostId
             createdAt
             updatedAt
           }
@@ -3973,6 +4040,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -4041,6 +4109,7 @@ export class APIService {
             jobpostId
             jobposttitle
             reccordState
+            postId
             event {
               __typename
               id
@@ -4106,6 +4175,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4126,6 +4196,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -4163,6 +4234,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4183,6 +4255,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -4220,6 +4293,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4240,6 +4314,7 @@ export class APIService {
               jobpostId
               jobposttitle
               reccordState
+              postId
               createdAt
               updatedAt
             }
@@ -4287,6 +4362,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4334,6 +4410,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4381,6 +4458,7 @@ export class APIService {
               completed
               eventId
               eventTitle
+              activityPostId
               createdAt
               updatedAt
             }
@@ -4689,6 +4767,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -4746,6 +4825,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -4803,6 +4883,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          activityPostId
           createdAt
           updatedAt
         }
@@ -4828,6 +4909,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -4888,6 +4970,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id
@@ -4948,6 +5031,7 @@ export class APIService {
           jobpostId
           jobposttitle
           reccordState
+          postId
           event {
             __typename
             id

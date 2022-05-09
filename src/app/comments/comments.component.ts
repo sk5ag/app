@@ -15,6 +15,7 @@ export class CommentsComponent implements OnInit {
   public comments: Array<any> = []; 
 
   displayedColumns: string[] = ['id', 'content', 'createdAt', 'updatedAt', 'Actions'];
+  
   listData!: MatTableDataSource<Comment>;
 
   constructor(
@@ -30,6 +31,7 @@ export class CommentsComponent implements OnInit {
   }
 
   async ngOnInit() {
+
     /* fetch comments when app loads */
     await this.api.ListComments().then((event) => {
       // this.posts = event.items as Post[];

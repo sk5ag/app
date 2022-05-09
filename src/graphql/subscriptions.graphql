@@ -17,6 +17,7 @@ subscription OnCreateUser {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -35,6 +36,7 @@ subscription OnCreateUser {
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -62,6 +64,7 @@ subscription OnUpdateUser {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -80,6 +83,7 @@ subscription OnUpdateUser {
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -107,6 +111,7 @@ subscription OnDeleteUser {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -125,6 +130,7 @@ subscription OnDeleteUser {
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -160,6 +166,7 @@ subscription OnCreateEvent {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -195,6 +202,7 @@ subscription OnUpdateEvent {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -230,6 +238,7 @@ subscription OnDeleteEvent {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -452,6 +461,7 @@ subscription OnCreateActivity {
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -495,6 +505,7 @@ subscription OnUpdateActivity {
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -538,6 +549,7 @@ subscription OnDeleteActivity {
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -555,6 +567,7 @@ subscription OnCreateJobs {
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle
@@ -601,6 +614,7 @@ subscription OnUpdateJobs {
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle
@@ -647,6 +661,7 @@ subscription OnDeleteJobs {
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle

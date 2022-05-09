@@ -20,6 +20,7 @@ mutation CreateUser(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -38,6 +39,7 @@ mutation CreateUser(
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -68,6 +70,7 @@ mutation UpdateUser(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -86,6 +89,7 @@ mutation UpdateUser(
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -116,6 +120,7 @@ mutation DeleteUser(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -134,6 +139,7 @@ mutation DeleteUser(
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -172,6 +178,7 @@ mutation CreateEvent(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -210,6 +217,7 @@ mutation UpdateEvent(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -248,6 +256,7 @@ mutation DeleteEvent(
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -491,6 +500,7 @@ mutation CreateActivity(
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -537,6 +547,7 @@ mutation UpdateActivity(
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -583,6 +594,7 @@ mutation DeleteActivity(
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -603,6 +615,7 @@ mutation CreateJobs(
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle
@@ -652,6 +665,7 @@ mutation UpdateJobs(
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle
@@ -701,6 +715,7 @@ mutation DeleteJobs(
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle

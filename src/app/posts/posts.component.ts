@@ -69,7 +69,7 @@ openComment(element: any){
     width: '95%',
     height: '95%',
     data: {
-      postId: element.id
+      postId: element.id 
     }
   });
 

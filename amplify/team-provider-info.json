@@ -21,6 +21,10 @@
         "app01f72b4b0ePostConfirmation": {
           "deploymentBucketName": "amplify-app01-dev-120024-deployment",
           "s3Key": "amplify-builds/app01f72b4b0ePostConfirmation-4c4d754d696456467742-build.zip"
+        },
+        "S3Trigger62fe6604": {
+          "deploymentBucketName": "amplify-app01-dev-120024-deployment",
+          "s3Key": "amplify-builds/S3Trigger62fe6604-32626430436761307044-build.zip"
         }
       }
     }

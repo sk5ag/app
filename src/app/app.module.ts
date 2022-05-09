@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { LegacyAmplifyUiModule } from '@aws-amplify/ui-angular/legacy';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 /* new form imports */
@@ -40,6 +41,7 @@ import { HomeComponent } from './home/home.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { ListcommentsComponent } from './comments/listcomments/listcomments.component';
 
 
 
@@ -59,11 +61,13 @@ import { JobsComponent } from './jobs/jobs.component';
     HomeComponent,
     ImageUploadComponent,
     ToolbarComponent,
-    JobsComponent
+    JobsComponent,
+    ListcommentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FlexLayoutModule,
     /* configure App with AmplifyAuthenticatorModule */
     AmplifyAuthenticatorModule,
     LegacyAmplifyUiModule,

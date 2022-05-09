@@ -97,7 +97,7 @@ export class ActivityComponent implements OnInit {
     this.api.GetEvent(element.id)
     .then(
       (event) => {
-        // console.log('Post Found in DynamoDB Table: ', event.posts?.items);
+        console.log('Post Found in DynamoDB Table: ', event.posts?.items);
         this.postItemsToActivityTable(event.posts?.items);
       }
     )
@@ -116,7 +116,7 @@ export class ActivityComponent implements OnInit {
         this.api.GetEvent(element.postEventId)
         .then((event)=> {
           // console.log('Event name for the postEventId is: ', event.eventtitle);
-          this.api.CreateActivity({name: element.title, activityUserId: this.userInfo, owneId:this.userInfo, completed: false, reported: false, eventId: element.postEventId, eventTitle: event.eventtitle})
+          this.api.CreateActivity({name: element.title, activityUserId: this.userInfo, owneId:this.userInfo, completed: false, reported: false, eventId: element.postEventId, eventTitle: event.eventtitle, activityPostId: element.id})
           .then((event) => {
             // console.log(event.name , '--> Item added to activities.')
           })

@@ -17,6 +17,7 @@ query GetUser($id: ID!) {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -35,6 +36,7 @@ query GetUser($id: ID!) {
         jobpostId
         jobposttitle
         reccordState
+        postId
         createdAt
         updatedAt
       }
@@ -95,6 +97,7 @@ query GetEvent($id: ID!) {
         completed
         eventId
         eventTitle
+        activityPostId
         createdAt
         updatedAt
       }
@@ -273,6 +276,7 @@ query GetActivity($id: ID!) {
       createdAt
       updatedAt
     }
+    activityPostId
     createdAt
     updatedAt
   }
@@ -309,6 +313,7 @@ query ListActivitys(
         createdAt
         updatedAt
       }
+      activityPostId
       createdAt
       updatedAt
     }
@@ -328,6 +333,7 @@ query GetJobs($id: ID!) {
     jobpostId
     jobposttitle
     reccordState
+    postId
     event {
       id
       eventtitle
@@ -379,6 +385,7 @@ query ListJobss(
       jobpostId
       jobposttitle
       reccordState
+      postId
       event {
         id
         eventtitle
