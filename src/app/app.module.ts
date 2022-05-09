@@ -39,6 +39,7 @@ import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { JobsComponent } from './jobs/jobs.component';
 
 
 
@@ -57,7 +58,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ActivityComponent,
     HomeComponent,
     ImageUploadComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    JobsComponent
   ],
   imports: [
     BrowserModule,

@@ -64,7 +64,7 @@ export class EventsComponent implements OnInit {
     /* fetch events when app loads */
     await this.api.ListEvents().then((event) => {
     this.events = event.items as Event[];
-    // console.log('EVENTS FETCHED: ', this.events)
+    console.log('EVENTS FETCHED: ', this.events)
   });
   this.loadEvents()
   }

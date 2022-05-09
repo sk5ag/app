@@ -8,6 +8,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { EventComponent } from './events/event/event.component';
 import { EventsComponent } from './events/events.component';
 import { HomeComponent } from './home/home.component';
+import { JobsComponent } from './jobs/jobs.component';
 import { PostComponent } from './posts/post/post.component';
 import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -27,6 +28,8 @@ const routes: Routes =  [
 
     {path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuard]},
     {path: 'activity', component: ActivityComponent, canActivate: [AuthGuard]},    
+
+    {path: 'jobs', component: JobsComponent, canActivate: [AuthGuard]},
 
     {path: 'profile', component: ProfileComponent},
     {path: 'home', component: HomeComponent}
